@@ -6,481 +6,43 @@
   <title>Harish Karthick R | Deep Space Flight Deck</title>
   <meta name="description" content="Embedded Systems, Robotics, and Signal Processing Portfolio of Harish Karthick R" />
 
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --space-black: #02040a;
-      --deep-navy: #050b18;
-      --stellar-blue: #00f0ff;
-      --pulsar-cyan: #38bdf8;
-      --plasma-pink: #ec4899;
-      --nebula-purple: #8b5cf6;
-      --starlight: #f0fdf4;
-      --text-muted: #94a3b8;
-      --panel-bg: rgba(7, 14, 28, 0.65);
-      --panel-border: rgba(0, 240, 255, 0.22);
-      --font-display: 'Orbitron', monospace;
-      --font-body: 'Rajdhani', sans-serif;
-      --font-code: 'JetBrains Mono', monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--space-black);
-      color: #e2e8f0;
-      font-family: var(--font-body);
-      font-size: 1.15rem;
-      line-height: 1.6;
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    /* Interactive Holographic Starfield Canvas */
-    #warp-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Ambient Dynamic Pulsing Nebulae */
-    .nebula {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      z-index: -1;
-      pointer-events: none;
-      animation: nebula-float 18s ease-in-out infinite alternate;
-    }
-
-    .nebula-1 {
-      top: -10vw;
-      left: -10vw;
-      width: 45vw;
-      height: 45vw;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, transparent 70%);
-    }
-
-    .nebula-2 {
-      bottom: -10vw;
-      right: -10vw;
-      width: 50vw;
-      height: 50vw;
-      background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
-      animation-duration: 22s;
-    }
-
-    @keyframes nebula-float {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(40px, -30px) scale(1.15); }
-      100% { transform: translate(-30px, 40px) scale(0.95); }
-    }
-
-    .container {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 4rem 1.75rem;
-      position: relative;
-    }
-
-    /* Sci-Fi Flight Deck HUD Header */
-    header {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      backdrop-filter: blur(16px);
-      border-radius: 12px;
-      padding: 3rem;
-      position: relative;
-      margin-bottom: 4rem;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(0, 240, 255, 0.05);
-      overflow: hidden;
-    }
-
-    /* Laser Scanner Animation across the Header */
-    header::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -100%;
-      width: 60%;
-      height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.08), transparent);
-      transform: rotate(25deg);
-      animation: scan-line 8s infinite linear;
-      pointer-events: none;
-    }
-
-    @keyframes scan-line {
-      0% { left: -100%; }
-      50%, 100% { left: 160%; }
-    }
-
-    /* Corner Sci-Fi Bracket Accents */
-    header::before {
-      content: '';
-      position: absolute;
-      top: -1px;
-      left: -1px;
-      width: 18px;
-      height: 18px;
-      border-top: 3px solid var(--stellar-blue);
-      border-left: 3px solid var(--stellar-blue);
-      box-shadow: 0 0 8px var(--stellar-blue);
-    }
-
-    .header-bottom-bracket {
-      position: absolute;
-      bottom: -1px;
-      right: -1px;
-      width: 18px;
-      height: 18px;
-      border-bottom: 3px solid var(--stellar-blue);
-      border-right: 3px solid var(--stellar-blue);
-      box-shadow: 0 0 8px var(--stellar-blue);
-    }
-
-    /* Holographic Status Badge */
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: var(--font-code);
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
-      color: var(--stellar-blue);
-      background: rgba(0, 240, 255, 0.08);
-      border: 1px solid rgba(0, 240, 255, 0.35);
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
-    }
-
-    .pulsing-beacon {
-      width: 8px;
-      height: 8px;
-      background: var(--stellar-blue);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--stellar-blue);
-      animation: beacon-blink 1.8s infinite ease-in-out;
-    }
-
-    @keyframes beacon-blink {
-      0%, 100% { opacity: 0.3; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.25); }
-    }
-
-    h1 {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      color: #ffffff;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-      background: linear-gradient(135deg, #ffffff 40%, var(--stellar-blue) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
-    }
-
-    .callsign {
-      font-family: var(--font-code);
-      color: var(--stellar-blue);
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.25rem;
-    }
-
-    .bio-lead {
-      color: var(--text-muted);
-      font-size: 1.2rem;
-      font-weight: 500;
-      max-width: 820px;
-      margin-bottom: 2.25rem;
-      line-height: 1.65;
-    }
-
-    .telemetry-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .nav-btn {
-      font-family: var(--font-code);
-      font-size: 0.85rem;
-      color: #ffffff;
-      text-decoration: none;
-      background: rgba(0, 240, 255, 0.05);
-      border: 1px solid var(--panel-border);
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .nav-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
-      transition: left 0.4s ease;
-    }
-
-    .nav-btn:hover {
-      border-color: var(--stellar-blue);
-      color: var(--stellar-blue);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .nav-btn:hover::before {
-      left: 100%;
-    }
-
-    /* Section Headers */
-    section {
-      margin-bottom: 4.5rem;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 1.45rem;
-      letter-spacing: 0.1em;
-      color: #ffffff;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--panel-border), transparent);
-    }
-
-    /* Grid & 3D Interactive Cards */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .cosmic-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: 10px;
-      padding: 1.75rem;
-      backdrop-filter: blur(12px);
-      transition: transform 0.25s ease-out, border-color 0.25s ease, box-shadow 0.25s ease;
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      perspective: 1000px;
-    }
-
-    .cosmic-card:hover {
-      border-color: rgba(0, 240, 255, 0.6);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.2);
-    }
-
-    .cosmic-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      color: #ffffff;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.65rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .cosmic-card p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
-    }
-
-    /* Constellation Tag Pills */
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      font-family: var(--font-code);
-      font-size: 0.76rem;
-      color: var(--stellar-blue);
-      background: rgba(0, 240, 255, 0.08);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
-      transition: all 0.2s ease;
-    }
-
-    .tag:hover {
-      background: rgba(0, 240, 255, 0.2);
-      border-color: var(--stellar-blue);
-      box-shadow: 0 0 8px var(--stellar-blue);
-    }
-
-    /* Trajectory Timeline */
-    .timeline {
-      position: relative;
-      border-left: 2px dashed rgba(0, 240, 255, 0.4);
-      margin-left: 1rem;
-      padding-left: 2rem;
-    }
-
-    .timeline-node {
-      position: relative;
-      margin-bottom: 2.25rem;
-    }
-
-    .timeline-node::before {
-      content: '';
-      position: absolute;
-      left: -2.45rem;
-      top: 6px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--space-black);
-      border: 2px solid var(--stellar-blue);
-      box-shadow: 0 0 10px var(--stellar-blue);
-    }
-
-    .node-epoch {
-      font-family: var(--font-code);
-      font-size: 0.8rem;
-      color: var(--plasma-pink);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .node-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      color: #ffffff;
-      margin: 0.2rem 0;
-    }
-
-    .node-desc {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-    }
-
-    /* Orbiting Warp Trigger */
-    .warp-speed-switch {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 50;
-      background: rgba(7, 14, 28, 0.85);
-      border: 1px solid var(--stellar-blue);
-      color: var(--stellar-blue);
-      font-family: var(--font-code);
-      font-size: 0.82rem;
-      padding: 0.75rem 1.25rem;
-      border-radius: 30px;
-      cursor: pointer;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .warp-speed-switch:hover {
-      background: var(--stellar-blue);
-      color: var(--space-black);
-      box-shadow: 0 0 30px var(--stellar-blue);
-      transform: scale(1.05);
-    }
-
-    /* Footer / Telemetry Data */
-    footer {
-      border-top: 1px solid var(--panel-border);
-      padding-top: 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-code);
-      font-size: 0.82rem;
-      color: #64748b;
-    }
-
-    @media (max-width: 680px) {
-      header {
-        padding: 1.75rem;
-      }
-      h1 {
-        font-size: 2.1rem;
-      }
-      footer {
-        flex-direction: column;
-        gap: 1.2rem;
-        text-align: center;
-      }
-      .warp-speed-switch {
-        bottom: 1rem;
-        right: 1rem;
-        padding: 0.5rem 0.9rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Interactive 3D Warp Field Background -->
+  <!-- 3D Starfield & Constellation Canvas -->
   <canvas id="warp-canvas"></canvas>
 
-  <!-- Ambient Pulsing Space Fog -->
+  <!-- Ambient Light Vortices -->
   <div class="nebula nebula-1"></div>
   <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
 
   <!-- Warp Accelerator Toggle -->
   <button class="warp-speed-switch" id="warpBtn">
-    <span style="font-size: 1.1rem;">⚡</span>
-    <span id="warpStatus">ENGAGE WARP DRIVE</span>
+    <div class="warp-indicator"></div>
+    <span id="warpStatus">ENGAGE HYPERDRIVE</span>
   </button>
 
   <div class="container">
-    <header>
-      <div class="header-bottom-bracket"></div>
-      
+    <!-- Flight Deck HUD Header -->
+    <header class="hud-header">
+      <div class="reticle top-left"></div>
+      <div class="reticle top-right"></div>
+      <div class="reticle bottom-left"></div>
+      <div class="reticle bottom-right"></div>
+
       <div class="status-badge">
         <span class="pulsing-beacon"></span>
-        <span>TELEMETRY: FLIGHT ACTIVE // CEG ANNA UNIVERSITY</span>
+        <span class="badge-text">TELEMETRY: FLIGHT ACTIVE // CEG ANNA UNIVERSITY</span>
       </div>
 
-      <h1>Harish Karthick R</h1>
+      <h1 class="glitch-text" data-text="HARISH KARTHICK R">HARISH KARTHICK R</h1>
       <div class="callsign">&gt; SPEC: EMBEDDED_SYSTEMS // ROBOTICS_ARCHITECT</div>
 
       <p class="bio-lead">
@@ -489,57 +51,85 @@
 
       <div class="telemetry-bar">
         <a class="nav-btn" href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener">
-          <span>&gt; GITHUB COMM</span>
+          <span class="btn-icon">⚡</span>
+          <span>GITHUB COMM</span>
         </a>
         <a class="nav-btn" href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener">
-          <span>&gt; LINKEDIN LINK</span>
+          <span class="btn-icon">📡</span>
+          <span>LINKEDIN LINK</span>
         </a>
-        <a class="nav-btn" href="mailto:your.email@example.com">
-          <span>&gt; TRANSMIT MESSAGE</span>
+        <a class="nav-btn btn-highlight" href="mailto:your.email@example.com">
+          <span class="btn-icon">✉️</span>
+          <span>TRANSMIT MESSAGE</span>
         </a>
       </div>
     </header>
 
     <!-- Missions & Projects -->
     <section id="missions">
-      <h2 class="section-title">ACTIVE MISSIONS &amp; PLATFORMS</h2>
+      <div class="section-header">
+        <span class="section-index">01 //</span>
+        <h2 class="section-title">ACTIVE MISSIONS &amp; PLATFORMS</h2>
+      </div>
+      
       <div class="grid">
         <div class="cosmic-card" data-tilt>
-          <h3><span>🛰️</span> 30 kg Tethered Facade Bot</h3>
-          <p>
-            Engineered real-time motion control firmware, capstan hoist dynamics, fail-safe safety interlocks, and active vacuum chamber adhesion for high-altitude facade robotics.
-          </p>
-          <div class="tags">
-            <span class="tag">STM32</span>
-            <span class="tag">FreeRTOS</span>
-            <span class="tag">Capstan Drive</span>
-            <span class="tag">Safety Circuits</span>
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-top">
+              <span class="card-icon">🛰️</span>
+              <span class="card-sub">MISSION ID: CLMB-30</span>
+            </div>
+            <h3>30 kg Tethered Facade Bot</h3>
+            <p>
+              Engineered real-time motion control firmware, capstan hoist dynamics, fail-safe safety interlocks, and active vacuum chamber adhesion for high-altitude facade robotics.
+            </p>
+            <div class="tags">
+              <span class="tag">STM32</span>
+              <span class="tag">FreeRTOS</span>
+              <span class="tag">Capstan Drive</span>
+              <span class="tag">Safety Circuits</span>
+            </div>
           </div>
         </div>
 
         <div class="cosmic-card" data-tilt>
-          <h3><span>⚡</span> Vibrantque &amp; Wiperque</h3>
-          <p>
-            Developed production bare-metal and RTOS control firmware, CAN bus networking layers, and 48V power distribution routing from initial concept to deployment.
-          </p>
-          <div class="tags">
-            <span class="tag">CAN Bus</span>
-            <span class="tag">Modbus RTU</span>
-            <span class="tag">BLDC / Stepper</span>
-            <span class="tag">Power Routing</span>
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-top">
+              <span class="card-icon">⚡</span>
+              <span class="card-sub">MISSION ID: VIB-WIP</span>
+            </div>
+            <h3>Vibrantque &amp; Wiperque</h3>
+            <p>
+              Developed production bare-metal and RTOS control firmware, CAN bus networking layers, and 48V power distribution routing from initial concept to deployment.
+            </p>
+            <div class="tags">
+              <span class="tag">CAN Bus</span>
+              <span class="tag">Modbus RTU</span>
+              <span class="tag">BLDC / Stepper</span>
+              <span class="tag">Power Routing</span>
+            </div>
           </div>
         </div>
 
         <div class="cosmic-card" data-tilt>
-          <h3><span>📡</span> Ground Control Station (GCS)</h3>
-          <p>
-            Architected a high-throughput, cross-platform telemetry control dashboard using Flutter for live multi-axis actuator graphing, override steering, and diagnostics.
-          </p>
-          <div class="tags">
-            <span class="tag">Flutter</span>
-            <span class="tag">Serial Stream</span>
-            <span class="tag">Live Telemetry</span>
-            <span class="tag">UI/UX</span>
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-top">
+              <span class="card-icon">📡</span>
+              <span class="card-sub">MISSION ID: GCS-STREAM</span>
+            </div>
+            <h3>Ground Control Station (GCS)</h3>
+            <p>
+              Architected a high-throughput, cross-platform telemetry control dashboard using Flutter for live multi-axis actuator graphing, override steering, and diagnostics.
+            </p>
+            <div class="tags">
+              <span class="tag">Flutter</span>
+              <span class="tag">Serial Stream</span>
+              <span class="tag">Live Telemetry</span>
+              <span class="tag">UI/UX</span>
+            </div>
           </div>
         </div>
       </div>
@@ -547,38 +137,63 @@
 
     <!-- Subsystems -->
     <section id="subsystems">
-      <h2 class="section-title">SUBSYSTEM CAPABILITIES</h2>
+      <div class="section-header">
+        <span class="section-index">02 //</span>
+        <h2 class="section-title">SUBSYSTEM CAPABILITIES</h2>
+      </div>
+
       <div class="grid">
         <div class="cosmic-card" data-tilt>
-          <h3><span>⚙️</span> Firmware &amp; MCUs</h3>
-          <p>ARM Cortex-M bare-metal drivers, DMA channels, and multi-threaded FreeRTOS synchronization.</p>
-          <div class="tags">
-            <span class="tag">C / C++</span>
-            <span class="tag">STM32CubeIDE</span>
-            <span class="tag">SPI / I2C / UART</span>
-            <span class="tag">SBUS Protocol</span>
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-top">
+              <span class="card-icon">⚙️</span>
+              <span class="card-sub">CORE ENGINE</span>
+            </div>
+            <h3>Firmware &amp; MCUs</h3>
+            <p>ARM Cortex-M bare-metal drivers, DMA channels, and multi-threaded FreeRTOS synchronization.</p>
+            <div class="tags">
+              <span class="tag">C / C++</span>
+              <span class="tag">STM32CubeIDE</span>
+              <span class="tag">SPI / I2C / UART</span>
+              <span class="tag">SBUS Protocol</span>
+            </div>
           </div>
         </div>
 
         <div class="cosmic-card" data-tilt>
-          <h3><span>🌌</span> Signal Processing &amp; Math</h3>
-          <p>Parametric spectrum modeling, Bayesian multi-object tracking, and discrete linear filters.</p>
-          <div class="tags">
-            <span class="tag">AR / ARMA</span>
-            <span class="tag">Levinson-Durbin</span>
-            <span class="tag">Scilab / MATLAB</span>
-            <span class="tag">Kalman / Tracking</span>
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-top">
+              <span class="card-icon">🌌</span>
+              <span class="card-sub">DSP NODES</span>
+            </div>
+            <h3>Signal Processing &amp; Math</h3>
+            <p>Parametric spectrum modeling, Bayesian multi-object tracking, and discrete linear filters.</p>
+            <div class="tags">
+              <span class="tag">AR / ARMA</span>
+              <span class="tag">Levinson-Durbin</span>
+              <span class="tag">Scilab / MATLAB</span>
+              <span class="tag">Bayesian MOT</span>
+            </div>
           </div>
         </div>
 
         <div class="cosmic-card" data-tilt>
-          <h3><span>🎨</span> Hardware &amp; PCB Art</h3>
-          <p>Multi-layer layout, power-plane routing, and aesthetic LED constellation artwork circuitry.</p>
-          <div class="tags">
-            <span class="tag">Schematic Design</span>
-            <span class="tag">PCB Art</span>
-            <span class="tag">Power Path</span>
-            <span class="tag">48V Bus</span>
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-top">
+              <span class="card-icon">🎨</span>
+              <span class="card-sub">HARDWARE ART</span>
+            </div>
+            <h3>Hardware &amp; PCB Art</h3>
+            <p>Multi-layer layout, power-plane routing, and aesthetic LED constellation artwork circuitry.</p>
+            <div class="tags">
+              <span class="tag">Schematic Design</span>
+              <span class="tag">PCB Art</span>
+              <span class="tag">Power Path</span>
+              <span class="tag">48V Bus</span>
+            </div>
           </div>
         </div>
       </div>
@@ -586,49 +201,55 @@
 
     <!-- Trajectory -->
     <section id="trajectory">
-      <h2 class="section-title">FLIGHT TRAJECTORY</h2>
+      <div class="section-header">
+        <span class="section-index">03 //</span>
+        <h2 class="section-title">FLIGHT TRAJECTORY</h2>
+      </div>
+
       <div class="timeline">
         <div class="timeline-node">
-          <div class="node-epoch">Current Epoch</div>
+          <div class="node-epoch">CURRENT EPOCH</div>
           <div class="node-title">M.E. Applied Electronics</div>
-          <div class="node-desc">College of Engineering, Guindy (CEG), Anna University. Advancing statistical estimation, Bayesian MOT, and embedded systems.</div>
+          <div class="node-sub">College of Engineering, Guindy (CEG), Anna University</div>
+          <div class="node-desc">Advancing statistical estimation, Bayesian MOT algorithms, and real-time computing systems.</div>
         </div>
 
         <div class="timeline-node">
-          <div class="node-epoch">Industry Service</div>
+          <div class="node-epoch">INDUSTRY COMMISSION</div>
           <div class="node-title">Senior Embedded Systems Engineer</div>
-          <div class="node-desc">Led embedded engineering teams, task scheduling, dynamic drive firmware, and robotic field validation.</div>
+          <div class="node-sub">Robotics &amp; Autonomous Motion Systems</div>
+          <div class="node-desc">Led embedded firmware architecture, dynamic motor control, and cross-functional team delivery.</div>
         </div>
 
         <div class="timeline-node">
-          <div class="node-epoch">Foundation</div>
+          <div class="node-epoch">FOUNDATION</div>
           <div class="node-title">B.E. in Electrical &amp; Electronics Engineering</div>
-          <div class="node-desc">Specialization in Robotics &amp; Industrial Autonomous Systems.</div>
+          <div class="node-sub">Specialization in Robotics</div>
+          <div class="node-desc">Core foundation in power electronics, linear feedback control, and autonomous kinematics.</div>
         </div>
       </div>
     </section>
 
     <footer>
-      <div>TRANSMISSION STATUS: NOMINAL // 2026 HARISH KARTHICK R</div>
-      <div>COORDINATES: CHENNAI, TN // HOSTED ON GITHUB PAGES</div>
+      <div>SYS_DIAG: 0x00_OPTIMAL // 2026 HARISH KARTHICK R</div>
+      <div>TRANSMITTING VIA GITHUB PAGES SECURE GATEWAY</div>
     </footer>
   </div>
 
-  <!-- Interactive 3D Warp Field & Card Tilt Engine -->
   <script>
     /* =========================================================
-       1. 3D WARP SPEED & CONSTELLATION INTERACTIVE ENGINE
+       CONSTELLATION NETWORK & 3D WARP ENGINE
        ========================================================= */
     const canvas = document.getElementById('warp-canvas');
     const ctx = canvas.getContext('2d');
 
     let width, height;
     let stars = [];
-    const numStars = 450;
+    const numStars = 220;
     let warpSpeed = 1.0;
     let targetSpeed = 1.0;
     let isWarpEngaged = false;
-    let mouseX = 0, mouseY = 0;
+    let mouse = { x: 0, y: 0, active: false };
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -641,16 +262,16 @@
       }
 
       reset() {
-        this.x = (Math.random() - 0.5) * width * 2;
-        this.y = (Math.random() - 0.5) * height * 2;
+        this.x = (Math.random() - 0.5) * width * 1.8;
+        this.y = (Math.random() - 0.5) * height * 1.8;
         this.z = Math.random() * width;
         this.pz = this.z;
-        this.radius = Math.random() * 1.5 + 0.5;
+        this.radius = Math.random() * 1.4 + 0.6;
       }
 
       update() {
         this.pz = this.z;
-        this.z -= 4 * warpSpeed;
+        this.z -= 2.5 * warpSpeed;
 
         if (this.z <= 0) {
           this.reset();
@@ -658,33 +279,35 @@
         }
       }
 
-      draw() {
-        const k = 250 / this.z;
-        const px = this.x * k + width / 2 + (mouseX * 0.05);
-        const py = this.y * k + height / 2 + (mouseY * 0.05);
+      getScreenCoords() {
+        const k = 220 / this.z;
+        const px = this.x * k + width / 2 + (mouse.x * 0.04);
+        const py = this.y * k + height / 2 + (mouse.y * 0.04);
+        return { px, py, k };
+      }
 
+      draw() {
+        const { px, py } = this.getScreenCoords();
         if (px < 0 || px >= width || py < 0 || py >= height) return;
 
-        const pk = 250 / this.pz;
-        const prevX = this.x * pk + width / 2 + (mouseX * 0.05);
-        const prevY = this.y * pk + height / 2 + (mouseY * 0.05);
-
-        const depthFade = (1 - this.z / width);
+        const depth = 1 - this.z / width;
 
         if (warpSpeed > 2.5) {
-          // Warp Stretch Line
+          const pk = 220 / this.pz;
+          const prevX = this.x * pk + width / 2 + (mouse.x * 0.04);
+          const prevY = this.y * pk + height / 2 + (mouse.y * 0.04);
+
           ctx.beginPath();
           ctx.moveTo(prevX, prevY);
           ctx.lineTo(px, py);
-          ctx.strokeStyle = `rgba(0, 240, 255, ${depthFade * 0.85})`;
-          ctx.lineWidth = depthFade * 2.5;
+          ctx.strokeStyle = `rgba(0, 240, 255, ${depth * 0.85})`;
+          ctx.lineWidth = depth * 2.8;
           ctx.stroke();
         } else {
-          // Circular Twinkling Star
           ctx.beginPath();
-          ctx.arc(px, py, this.radius * (1 - this.z / width) * 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(224, 242, 254, ${depthFade})`;
-          ctx.shadowBlur = depthFade > 0.6 ? 8 : 0;
+          ctx.arc(px, py, this.radius * depth * 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(224, 242, 254, ${depth * 0.95})`;
+          ctx.shadowBlur = depth > 0.6 ? 8 : 0;
           ctx.shadowColor = '#00f0ff';
           ctx.fill();
         }
@@ -698,13 +321,56 @@
       }
     }
 
-    function animate() {
-      // Smooth Warp Acceleration / Deceleration
-      warpSpeed += (targetSpeed - warpSpeed) * 0.05;
+    function renderConstellations() {
+      if (warpSpeed > 2.0) return; // Disengage constellation webbing during hyperdrive
 
-      // Deep space clear with tail drag during warp
-      ctx.fillStyle = warpSpeed > 3 ? 'rgba(2, 4, 10, 0.4)' : 'rgba(2, 4, 10, 1)';
+      const maxDist = 85;
+      for (let i = 0; i < stars.length; i++) {
+        const p1 = stars[i].getScreenCoords();
+        if (p1.px < 0 || p1.px >= width || p1.py < 0 || p1.py >= height) continue;
+
+        // Line to cursor
+        if (mouse.active) {
+          const cursorDx = p1.px - (mouse.x + width / 2);
+          const cursorDy = p1.py - (mouse.y + height / 2);
+          const cursorDist = Math.sqrt(cursorDx * cursorDx + cursorDy * cursorDy);
+          if (cursorDist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p1.px, p1.py);
+            ctx.lineTo(mouse.x + width / 2, mouse.y + height / 2);
+            ctx.strokeStyle = `rgba(0, 240, 255, ${(1 - cursorDist / 120) * 0.4})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+
+        // Lines between close stars
+        for (let j = i + 1; j < Math.min(i + 15, stars.length); j++) {
+          const p2 = stars[j].getScreenCoords();
+          const dx = p1.px - p2.px;
+          const dy = p1.py - p2.py;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDist) {
+            const alpha = (1 - dist / maxDist) * 0.18;
+            ctx.beginPath();
+            ctx.moveTo(p1.px, p1.py);
+            ctx.lineTo(p2.px, p2.py);
+            ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      warpSpeed += (targetSpeed - warpSpeed) * 0.06;
+
+      ctx.fillStyle = warpSpeed > 3 ? 'rgba(2, 4, 10, 0.35)' : 'rgba(2, 4, 10, 1)';
       ctx.fillRect(0, 0, width, height);
+
+      renderConstellations();
 
       for (let star of stars) {
         star.update();
@@ -720,26 +386,29 @@
     });
 
     window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX - width / 2;
-      mouseY = e.clientY - height / 2;
+      mouse.x = e.clientX - width / 2;
+      mouse.y = e.clientY - height / 2;
+      mouse.active = true;
     });
 
-    // Warp Button Controller
+    window.addEventListener('mouseleave', () => {
+      mouse.active = false;
+    });
+
+    // Hyperdrive Trigger
     const warpBtn = document.getElementById('warpBtn');
     const warpStatus = document.getElementById('warpStatus');
 
     warpBtn.addEventListener('click', () => {
       isWarpEngaged = !isWarpEngaged;
       if (isWarpEngaged) {
-        targetSpeed = 12.0;
+        targetSpeed = 14.0;
         warpStatus.innerText = 'DISENGAGE WARP';
-        warpBtn.style.background = '#00f0ff';
-        warpBtn.style.color = '#02040a';
+        warpBtn.classList.add('active');
       } else {
         targetSpeed = 1.0;
-        warpStatus.innerText = 'ENGAGE WARP DRIVE';
-        warpBtn.style.background = 'rgba(7, 14, 28, 0.85)';
-        warpBtn.style.color = '#00f0ff';
+        warpStatus.innerText = 'ENGAGE HYPERDRIVE';
+        warpBtn.classList.remove('active');
       }
     });
 
@@ -748,11 +417,13 @@
     animate();
 
     /* =========================================================
-       2. HOLOGRAPHIC 3D CARD TILT ON MOUSE HOVER
+       SPECULAR 3D PARALLAX CARD TILT WITH DYNAMIC REFLECTION
        ========================================================= */
     const cards = document.querySelectorAll('[data-tilt]');
 
     cards.forEach(card => {
+      const glow = card.querySelector('.card-glow');
+
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -761,17 +432,25 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -10;
-        const rotateY = ((x - centerX) / centerX) * 10;
+        const rotateX = ((y - centerY) / centerY) * -12;
+        const rotateY = ((x - centerX) / centerX) * 12;
 
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+
+        // Update Specular Spotlight position
+        if (glow) {
+          glow.style.opacity = '1';
+          glow.style.transform = `translate(${x - 150}px, ${y - 150}px)`;
+        }
       });
 
       card.addEventListener('mouseleave', () => {
         card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+        if (glow) {
+          glow.style.opacity = '0';
+        }
       });
     });
   </script>
-
 </body>
 </html>
