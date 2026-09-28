@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harish Karthick R | Embedded Systems & Robotics Engineer</title>
+  <meta name="description" content="Personal portfolio and technical profile of Harish Karthick R, Senior Embedded Systems Engineer and Robotics Researcher." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-elevated: #1a2234;
+      --border: #1f293d;
+      --border-accent: rgba(56, 189, 248, 0.3);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --text: #f3f4f6;
+      --text-muted: #94a3b8;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.65;
+      padding: 3rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Terminal Prompt Header */
+    header {
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid var(--border-accent);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .role-title {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .links-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.825rem;
+      color: var(--text);
+      text-decoration: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--surface-elevated);
+      transform: translateY(-1px);
+    }
+
+    /* Section Structure */
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    h2::before {
+      content: '>';
+      color: var(--accent);
+      font-family: var(--mono);
+      font-weight: 700;
+    }
+
+    p.lead {
+      color: var(--text-muted);
+      font-size: 0.975rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Grid Layouts */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.35rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .domain-title {
+      font-family: var(--mono);
+      font-size: 0.825rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Skill Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: #e2e8f0;
+      background: var(--surface-elevated);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 0.15rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    /* Academic & Experience Details */
+    .timeline-item {
+      border-left: 2px solid var(--border);
+      padding-left: 1.25rem;
+      margin-left: 0.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .timeline-date {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0.1rem 0;
+    }
+
+    .timeline-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 2rem 1rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      footer {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">
+        <span class="pulse"></span>
+        <span>Active Research &amp; Engineering</span>
+      </div>
+      <h1>Harish Karthick R</h1>
+      <p class="role-title">Senior Embedded Systems Engineer | Robotics &amp; Firmware Architect</p>
+      
+      <div class="links-bar">
+        <a class="btn" href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener">
+          <span>GitHub</span>
+        </a>
+        <a class="btn" href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener">
+          <span>LinkedIn</span>
+        </a>
+        <a class="btn" href="mailto:your.email@example.com">
+          <span>Get in Touch</span>
+        </a>
+      </div>
+    </header>
+
+    <section id="about">
+      <h2>Profile Overview</h2>
+      <p class="lead">
+        Senior Embedded Systems Engineer with over two years of professional industry experience in production bare-metal and RTOS firmware architecture, industrial motor drives, and robotics automation. 
+      </p>
+      <p class="lead">
+        Currently pursuing a full-time Master of Engineering in Applied Electronics at the College of Engineering, Guindy (CEG), Anna University. My technical domain bridges deterministic real-time embedded control, industrial communication protocols, and statistical signal processing.
+      </p>
+    </section>
+
+    <section id="education-experience">
+      <h2>Background &amp; Roles</h2>
+      
+      <div class="timeline-item">
+        <span class="timeline-date">Current</span>
+        <div class="timeline-title">M.E. in Applied Electronics</div>
+        <div class="timeline-sub">College of Engineering, Guindy (CEG), Anna University</div>
+        <p class="card-p" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.35rem;">
+          Focus on statistical signal processing, Bayesian multi-object tracking, and advanced real-time systems.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-date">Industry Experience</span>
+        <div class="timeline-title">Senior Embedded Systems Engineer</div>
+        <div class="timeline-sub">Industrial Robotics &amp; Automation</div>
+        <p class="card-p" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.35rem;">
+          Led embedded development teams, allocated milestones, and engineered production-grade control firmware for specialized climbing and cleaning robotic platforms.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <span class="timeline-date">Undergraduate</span>
+        <div class="timeline-title">B.E. in Electrical &amp; Electronics Engineering</div>
+        <div class="timeline-sub">Specialization in Robotics</div>
+      </div>
+    </section>
+
+    <section id="technical-arsenal">
+      <h2>Technical Stack</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="domain-title">Embedded &amp; RTOS</div>
+          <div class="tags">
+            <span class="tag">C</span>
+            <span class="tag">C++</span>
+            <span class="tag">ARM Cortex-M</span>
+            <span class="tag">STM32 / STM32CubeIDE</span>
+            <span class="tag">FreeRTOS</span>
+            <span class="tag">CAN Bus</span>
+            <span class="tag">Modbus RTU</span>
+            <span class="tag">SBUS / UART / SPI / I2C</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="domain-title">Robotics &amp; Power Path</div>
+          <div class="tags">
+            <span class="tag">Differential Drive Kinematics</span>
+            <span class="tag">BLDC &amp; Stepper Drivers</span>
+            <span class="tag">Closed-loop PID</span>
+            <span class="tag">Capstan Drives</span>
+            <span class="tag">Vacuum Adhesion</span>
+            <span class="tag">48V Power Distribution</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="domain-title">Signal Processing &amp; Math</div>
+          <div class="tags">
+            <span class="tag">Statistical Signal Processing</span>
+            <span class="tag">Parametric Modeling (AR/ARMA)</span>
+            <span class="tag">Spectral Estimation</span>
+            <span class="tag">Bayesian Multi-Object Tracking</span>
+            <span class="tag">Scilab / MATLAB</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="domain-title">Hardware &amp; Software Tooling</div>
+          <div class="tags">
+            <span class="tag">PCB Layout &amp; Hardware Art</span>
+            <span class="tag">Flutter (Ground Control Station)</span>
+            <span class="tag">Git / CI/CD</span>
+            <span class="tag">Linux / GDB / OpenOCD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="engineering-projects">
+      <h2>Featured Engineering Systems</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>30 kg Tethered Facade Robot</h3>
+          <p>
+            Architected RTOS-based motion control, safety-critical fail-safe circuits, and high-power distribution for a 30 kg facade cleaning and painting robot utilizing vacuum suction adhesion.
+          </p>
+          <div class="tags">
+            <span class="tag">STM32</span>
+            <span class="tag">FreeRTOS</span>
+            <span class="tag">Capstan Drive</span>
+            <span class="tag">Safety Circuits</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Vibrantque &amp; Wiperque Robotic Platforms</h3>
+          <p>
+            Engineered electronic drive architectures, dynamic power routing, and modular embedded codebases for autonomous and teleoperated specialized robotics from concept to MVP.
+          </p>
+          <div class="tags">
+            <span class="tag">Motion Control</span>
+            <span class="tag">CAN Protocol</span>
+            <span class="tag">Hardware Integration</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Ground Control Station (GCS) Interface</h3>
+          <p>
+            Built a responsive, cross-platform telemetry control dashboard utilizing Flutter to monitor multi-axis sensor data, operational states, and actuator telemetry in real time.
+          </p>
+          <div class="tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Real-Time Telemetry</span>
+            <span class="tag">Serial Stream</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>&copy; 2026 Harish Karthick R</span>
+      <span>Engineered with pure HTML/CSS</span>
+    </footer>
+  </div>
+
+</body>
+</html>
