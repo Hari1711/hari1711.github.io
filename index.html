@@ -3,27 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harish Karthick R | Embedded Systems & Robotics Engineer</title>
-  <meta name="description" content="Personal portfolio and technical profile of Harish Karthick R, Senior Embedded Systems Engineer and Robotics Researcher." />
-  
-  <!-- Fonts -->
+  <title>Harish Karthick R | Deep Space Flight Deck</title>
+  <meta name="description" content="Embedded Systems, Robotics, and Signal Processing Portfolio of Harish Karthick R" />
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #090d16;
-      --surface: #111827;
-      --surface-elevated: #1a2234;
-      --border: #1f293d;
-      --border-accent: rgba(56, 189, 248, 0.3);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
-      --text: #f3f4f6;
-      --text-muted: #94a3b8;
-      --mono: 'JetBrains Mono', monospace;
-      --sans: 'Plus Jakarta Sans', sans-serif;
+      --space-black: #030712;
+      --deep-navy: #070e22;
+      --starlight: #e0f2fe;
+      --stellar-blue: #38bdf8;
+      --pulsar-cyan: #06b6d4;
+      --nebula-purple: #818cf8;
+      --cosmic-glow: rgba(56, 189, 248, 0.25);
+      --card-bg: rgba(15, 23, 42, 0.65);
+      --card-border: rgba(56, 189, 248, 0.18);
+      --font-display: 'Orbitron', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
     }
 
     * {
@@ -33,236 +34,312 @@
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      line-height: 1.65;
-      padding: 3rem 1.5rem;
-      -webkit-font-smoothing: antialiased;
+      background-color: var(--space-black);
+      color: var(--starlight);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Interactive Background Starfield */
+    #space-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Ambient Nebula Lighting */
+    .nebula-glow-1 {
+      position: fixed;
+      top: -150px;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.15) 0%, transparent 70%);
+      z-index: -1;
+      filter: blur(80px);
+    }
+
+    .nebula-glow-2 {
+      position: fixed;
+      bottom: -150px;
+      right: -150px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+      z-index: -1;
+      filter: blur(90px);
     }
 
     .container {
-      max-width: 860px;
+      max-width: 960px;
       margin: 0 auto;
+      padding: 3.5rem 1.5rem;
     }
 
-    /* Terminal Prompt Header */
+    /* Flight Deck / HUD Header */
     header {
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      padding: 2.5rem;
+      border-radius: 12px;
+      position: relative;
       margin-bottom: 3.5rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 2.5rem;
+      box-shadow: 0 0 30px rgba(7, 14, 34, 0.8), inset 0 0 20px rgba(56, 189, 248, 0.05);
     }
 
-    .badge {
+    /* Corner Sci-Fi Bracket Accents */
+    header::before, header::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: var(--stellar-blue);
+      border-style: solid;
+      pointer-events: none;
+    }
+    header::before {
+      top: -1px;
+      left: -1px;
+      border-width: 2px 0 0 2px;
+    }
+    header::after {
+      bottom: -1px;
+      right: -1px;
+      border-width: 0 2px 2px 0;
+    }
+
+    .status-beacon {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--accent);
-      background: var(--accent-glow);
-      border: 1px solid var(--border-accent);
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
+      font-family: var(--font-code);
+      font-size: 0.78rem;
+      color: var(--pulsar-cyan);
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
       margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .pulse {
+    .pulsing-dot {
       width: 7px;
       height: 7px;
-      background: var(--accent);
+      background-color: var(--pulsar-cyan);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent);
+      box-shadow: 0 0 10px var(--pulsar-cyan);
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.3; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-family: var(--font-display);
+      font-size: 2.4rem;
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: 0.05em;
       color: #ffffff;
-      margin-bottom: 0.5rem;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+      margin-bottom: 0.4rem;
     }
 
-    .role-title {
-      font-size: 1.15rem;
-      font-weight: 400;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
+    .callsign {
+      font-family: var(--font-code);
+      color: var(--stellar-blue);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
     }
 
-    .links-bar {
+    .bio-lead {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 780px;
+      margin-bottom: 1.8rem;
+    }
+
+    .telemetry-nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
 
-    .btn {
-      font-family: var(--mono);
-      font-size: 0.825rem;
-      color: var(--text);
+    .telemetry-link {
+      font-family: var(--font-code);
+      font-size: 0.8rem;
       text-decoration: none;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 0.45rem 1rem;
+      color: var(--starlight);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      padding: 0.5rem 1.1rem;
       border-radius: 6px;
-      transition: all 0.2s ease;
-      display: inline-flex;
+      transition: all 0.25s ease;
+      display: flex;
       align-items: center;
       gap: 0.4rem;
     }
 
-    .btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--surface-elevated);
-      transform: translateY(-1px);
+    .telemetry-link:hover {
+      border-color: var(--stellar-blue);
+      color: var(--stellar-blue);
+      background: rgba(56, 189, 248, 0.08);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+      transform: translateY(-2px);
     }
 
-    /* Section Structure */
+    /* Section Styling */
     section {
       margin-bottom: 3.5rem;
     }
 
-    h2 {
+    .section-title {
+      font-family: var(--font-display);
       font-size: 1.25rem;
-      font-weight: 600;
       color: #ffffff;
-      margin-bottom: 1.25rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.75rem;
     }
 
-    h2::before {
-      content: '>';
-      color: var(--accent);
-      font-family: var(--mono);
-      font-weight: 700;
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--card-border), transparent);
     }
 
-    p.lead {
-      color: var(--text-muted);
-      font-size: 0.975rem;
+    /* Card & Module Grids */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .module-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .module-card:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(56, 189, 248, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .module-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .module-card p {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.6;
       margin-bottom: 1rem;
     }
 
-    /* Grid Layouts */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.35rem;
-      transition: border-color 0.2s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-    }
-
-    .card h3 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #ffffff;
-      margin-bottom: 0.4rem;
-    }
-
-    .card p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 0.85rem;
-    }
-
-    .domain-title {
-      font-family: var(--mono);
-      font-size: 0.825rem;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Skill Tags */
-    .tags {
+    .constellation-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
     }
 
-    .tag {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: #e2e8f0;
-      background: var(--surface-elevated);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      padding: 0.15rem 0.55rem;
+    .const-tag {
+      font-family: var(--font-code);
+      font-size: 0.72rem;
+      color: var(--stellar-blue);
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 0.2rem 0.5rem;
       border-radius: 4px;
     }
 
-    /* Academic & Experience Details */
-    .timeline-item {
-      border-left: 2px solid var(--border);
-      padding-left: 1.25rem;
-      margin-left: 0.5rem;
-      margin-bottom: 1.5rem;
+    /* Timeline / Trajectory */
+    .trajectory-item {
       position: relative;
+      border-left: 1px dashed var(--stellar-blue);
+      padding-left: 1.5rem;
+      margin-left: 0.75rem;
+      margin-bottom: 1.75rem;
     }
 
-    .timeline-item::before {
-      content: '';
+    .trajectory-node {
       position: absolute;
       left: -6px;
-      top: 6px;
-      width: 10px;
-      height: 10px;
+      top: 4px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--space-black);
+      border: 2px solid var(--stellar-blue);
+      box-shadow: 0 0 8px var(--stellar-blue);
     }
 
-    .timeline-date {
-      font-family: var(--mono);
+    .trajectory-epoch {
+      font-family: var(--font-code);
       font-size: 0.75rem;
-      color: var(--accent);
+      color: var(--nebula-purple);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .timeline-title {
-      font-size: 1rem;
+    .trajectory-heading {
+      font-size: 1.05rem;
       font-weight: 600;
       color: #ffffff;
-      margin: 0.1rem 0;
+      margin: 0.15rem 0;
     }
 
-    .timeline-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    .trajectory-desc {
+      font-size: 0.88rem;
+      color: #94a3b8;
     }
 
+    /* Ground Control / Footer */
     footer {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--card-border);
       padding-top: 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
+      font-family: var(--font-code);
+      font-size: 0.78rem;
+      color: #64748b;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 2rem 1rem;
+    @media (max-width: 640px) {
+      header {
+        padding: 1.5rem;
       }
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
       footer {
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 1rem;
         text-align: center;
       }
     }
@@ -270,165 +347,208 @@
 </head>
 <body>
 
+  <!-- Dynamic Starfield Canvas -->
+  <canvas id="space-canvas"></canvas>
+
+  <!-- Ambient Light Fields -->
+  <div class="nebula-glow-1"></div>
+  <div class="nebula-glow-2"></div>
+
   <div class="container">
     <header>
-      <div class="badge">
-        <span class="pulse"></span>
-        <span>Active Research &amp; Engineering</span>
+      <div class="status-beacon">
+        <span class="pulsing-dot"></span>
+        <span>Orbit: M.E. Applied Electronics @ CEG</span>
       </div>
       <h1>Harish Karthick R</h1>
-      <p class="role-title">Senior Embedded Systems Engineer | Robotics &amp; Firmware Architect</p>
-      
-      <div class="links-bar">
-        <a class="btn" href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener">
-          <span>GitHub</span>
+      <div class="callsign">// SYSTEM PROTOCOL: EMBEDDED_ROBOTICS_CORE</div>
+      <p class="bio-lead">
+        Senior Embedded Systems Engineer specializing in real-time firmware architecture, deterministic motor control, and industrial robotics. Engineering robust bare-metal and RTOS control pipelines with a foundation in statistical signal processing.
+      </p>
+
+      <div class="telemetry-nav">
+        <a class="telemetry-link" href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener">
+          <span>&gt; GITHUB</span>
         </a>
-        <a class="btn" href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener">
-          <span>LinkedIn</span>
+        <a class="telemetry-link" href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener">
+          <span>&gt; LINKEDIN</span>
         </a>
-        <a class="btn" href="mailto:your.email@example.com">
-          <span>Get in Touch</span>
+        <a class="telemetry-link" href="mailto:your.email@example.com">
+          <span>&gt; COMM-LINK</span>
         </a>
       </div>
     </header>
 
-    <section id="about">
-      <h2>Profile Overview</h2>
-      <p class="lead">
-        Senior Embedded Systems Engineer with over two years of professional industry experience in production bare-metal and RTOS firmware architecture, industrial motor drives, and robotics automation. 
-      </p>
-      <p class="lead">
-        Currently pursuing a full-time Master of Engineering in Applied Electronics at the College of Engineering, Guindy (CEG), Anna University. My technical domain bridges deterministic real-time embedded control, industrial communication protocols, and statistical signal processing.
-      </p>
-    </section>
-
-    <section id="education-experience">
-      <h2>Background &amp; Roles</h2>
-      
-      <div class="timeline-item">
-        <span class="timeline-date">Current</span>
-        <div class="timeline-title">M.E. in Applied Electronics</div>
-        <div class="timeline-sub">College of Engineering, Guindy (CEG), Anna University</div>
-        <p class="card-p" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.35rem;">
-          Focus on statistical signal processing, Bayesian multi-object tracking, and advanced real-time systems.
-        </p>
-      </div>
-
-      <div class="timeline-item">
-        <span class="timeline-date">Industry Experience</span>
-        <div class="timeline-title">Senior Embedded Systems Engineer</div>
-        <div class="timeline-sub">Industrial Robotics &amp; Automation</div>
-        <p class="card-p" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.35rem;">
-          Led embedded development teams, allocated milestones, and engineered production-grade control firmware for specialized climbing and cleaning robotic platforms.
-        </p>
-      </div>
-
-      <div class="timeline-item">
-        <span class="timeline-date">Undergraduate</span>
-        <div class="timeline-title">B.E. in Electrical &amp; Electronics Engineering</div>
-        <div class="timeline-sub">Specialization in Robotics</div>
-      </div>
-    </section>
-
-    <section id="technical-arsenal">
-      <h2>Technical Stack</h2>
+    <!-- Missions & Projects -->
+    <section id="missions">
+      <h2 class="section-title">ENGINEERED MISSIONS</h2>
       <div class="grid">
-        <div class="card">
-          <div class="domain-title">Embedded &amp; RTOS</div>
-          <div class="tags">
-            <span class="tag">C</span>
-            <span class="tag">C++</span>
-            <span class="tag">ARM Cortex-M</span>
-            <span class="tag">STM32 / STM32CubeIDE</span>
-            <span class="tag">FreeRTOS</span>
-            <span class="tag">CAN Bus</span>
-            <span class="tag">Modbus RTU</span>
-            <span class="tag">SBUS / UART / SPI / I2C</span>
+        <div class="module-card">
+          <h3>30 kg Tethered Facade Bot</h3>
+          <p>
+            Architected RTOS-based motion control, safety-critical fail-safe circuits, and high-voltage power distribution for a climbing robotics platform with active vacuum adhesion.
+          </p>
+          <div class="constellation-tags">
+            <span class="const-tag">STM32</span>
+            <span class="const-tag">FreeRTOS</span>
+            <span class="const-tag">Capstan Drive</span>
+            <span class="const-tag">Power Distribution</span>
           </div>
         </div>
 
-        <div class="card">
-          <div class="domain-title">Robotics &amp; Power Path</div>
-          <div class="tags">
-            <span class="tag">Differential Drive Kinematics</span>
-            <span class="tag">BLDC &amp; Stepper Drivers</span>
-            <span class="tag">Closed-loop PID</span>
-            <span class="tag">Capstan Drives</span>
-            <span class="tag">Vacuum Adhesion</span>
-            <span class="tag">48V Power Distribution</span>
+        <div class="module-card">
+          <h3>Robotics &amp; Motion Nodes</h3>
+          <p>
+            Engineered differential drive kinematic engines, closed-loop PID velocity tracking, and modular communication pipelines across CAN bus and industrial Modbus.
+          </p>
+          <div class="constellation-tags">
+            <span class="const-tag">C / C++</span>
+            <span class="const-tag">CAN Bus</span>
+            <span class="const-tag">Modbus RTU</span>
+            <span class="const-tag">Kinematics</span>
           </div>
         </div>
 
-        <div class="card">
-          <div class="domain-title">Signal Processing &amp; Math</div>
-          <div class="tags">
-            <span class="tag">Statistical Signal Processing</span>
-            <span class="tag">Parametric Modeling (AR/ARMA)</span>
-            <span class="tag">Spectral Estimation</span>
-            <span class="tag">Bayesian Multi-Object Tracking</span>
-            <span class="tag">Scilab / MATLAB</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="domain-title">Hardware &amp; Software Tooling</div>
-          <div class="tags">
-            <span class="tag">PCB Layout &amp; Hardware Art</span>
-            <span class="tag">Flutter (Ground Control Station)</span>
-            <span class="tag">Git / CI/CD</span>
-            <span class="tag">Linux / GDB / OpenOCD</span>
+        <div class="module-card">
+          <h3>Flight GCS Telemetry</h3>
+          <p>
+            Designed a high-throughput, cross-platform Ground Control Station dashboard for real-time robotic telemetry visualization, sensor streams, and diagnostic commands.
+          </p>
+          <div class="constellation-tags">
+            <span class="const-tag">Flutter</span>
+            <span class="const-tag">Serial Comm</span>
+            <span class="const-tag">Telemetry UI</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="engineering-projects">
-      <h2>Featured Engineering Systems</h2>
+    <!-- Subsystem Modules -->
+    <section id="subsystems">
+      <h2 class="section-title">CORE SUBSYSTEMS</h2>
       <div class="grid">
-        <div class="card">
-          <h3>30 kg Tethered Facade Robot</h3>
-          <p>
-            Architected RTOS-based motion control, safety-critical fail-safe circuits, and high-power distribution for a 30 kg facade cleaning and painting robot utilizing vacuum suction adhesion.
-          </p>
-          <div class="tags">
-            <span class="tag">STM32</span>
-            <span class="tag">FreeRTOS</span>
-            <span class="tag">Capstan Drive</span>
-            <span class="tag">Safety Circuits</span>
+        <div class="module-card">
+          <h3>Firmware &amp; Microcontrollers</h3>
+          <p>Bare-metal drivers, RTOS multi-task scheduling, and DMA data channels.</p>
+          <div class="constellation-tags">
+            <span class="const-tag">ARM Cortex-M</span>
+            <span class="const-tag">STM32CubeIDE</span>
+            <span class="const-tag">I2C / SPI / UART</span>
+            <span class="const-tag">SBUS Protocol</span>
           </div>
         </div>
 
-        <div class="card">
-          <h3>Vibrantque &amp; Wiperque Robotic Platforms</h3>
-          <p>
-            Engineered electronic drive architectures, dynamic power routing, and modular embedded codebases for autonomous and teleoperated specialized robotics from concept to MVP.
-          </p>
-          <div class="tags">
-            <span class="tag">Motion Control</span>
-            <span class="tag">CAN Protocol</span>
-            <span class="tag">Hardware Integration</span>
+        <div class="module-card">
+          <h3>Dynamics &amp; Actuation</h3>
+          <p>Power-path routing, actuator drivers, and kinematic mechanisms.</p>
+          <div class="constellation-tags">
+            <span class="const-tag">BLDC / Steppers</span>
+            <span class="const-tag">Vacuum Pumps</span>
+            <span class="const-tag">Capstans</span>
+            <span class="const-tag">48V Architectures</span>
           </div>
         </div>
 
-        <div class="card">
-          <h3>Ground Control Station (GCS) Interface</h3>
-          <p>
-            Built a responsive, cross-platform telemetry control dashboard utilizing Flutter to monitor multi-axis sensor data, operational states, and actuator telemetry in real time.
-          </p>
-          <div class="tags">
-            <span class="tag">Flutter</span>
-            <span class="tag">Real-Time Telemetry</span>
-            <span class="tag">Serial Stream</span>
+        <div class="module-card">
+          <h3>DSP &amp; Estimation</h3>
+          <p>Discrete mathematical modeling, noise estimation, and target tracking.</p>
+          <div class="constellation-tags">
+            <span class="const-tag">Statistical Signal Proc</span>
+            <span class="const-tag">AR / ARMA Models</span>
+            <span class="const-tag">Bayesian MOT</span>
+            <span class="const-tag">Scilab / MATLAB</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Trajectory / Experience -->
+    <section id="trajectory">
+      <h2 class="section-title">FLIGHT TRAJECTORY</h2>
+
+      <div class="trajectory-item">
+        <div class="trajectory-node"></div>
+        <div class="trajectory-epoch">2026 — Present</div>
+        <div class="trajectory-heading">M.E. in Applied Electronics</div>
+        <div class="trajectory-desc">College of Engineering, Guindy (CEG), Anna University. Focus on advanced embedded systems and statistical estimation.</div>
+      </div>
+
+      <div class="trajectory-item">
+        <div class="trajectory-node"></div>
+        <div class="trajectory-epoch">Industry Deployment</div>
+        <div class="trajectory-heading">Senior Embedded Systems Engineer</div>
+        <div class="trajectory-desc">Led hardware-firmware integration, industrial robotics prototyping, and motor control execution.</div>
+      </div>
+
+      <div class="trajectory-item">
+        <div class="trajectory-node"></div>
+        <div class="trajectory-epoch">Foundation</div>
+        <div class="trajectory-heading">B.E. in Electrical &amp; Electronics Engineering</div>
+        <div class="trajectory-desc">Specialization in Robotics &amp; Autonomous Control.</div>
       </div>
     </section>
 
     <footer>
-      <span>&copy; 2026 Harish Karthick R</span>
-      <span>Engineered with pure HTML/CSS</span>
+      <div>SYS_STATUS: NOMINAL // 2026 HARISH KARTHICK R</div>
+      <div>TRANSMITTING VIA GITHUB PAGES</div>
     </footer>
   </div>
+
+  <!-- Starfield Canvas Animation Script -->
+  <script>
+    const canvas = document.getElementById('space-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let stars = [];
+    const numStars = 120;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.4 + 0.3,
+          alpha: Math.random() * 0.8 + 0.2,
+          speed: Math.random() * 0.02 + 0.005,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < stars.length; i++) {
+        const star = stars[i];
+        star.phase += star.speed;
+        const currentAlpha = Math.max(0.1, Math.sin(star.phase) * star.alpha);
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(224, 242, 254, ${currentAlpha})`;
+        ctx.shadowBlur = star.radius > 1 ? 6 : 0;
+        ctx.shadowColor = '#38bdf8';
+        ctx.fill();
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initStars();
+    });
+
+    resizeCanvas();
+    initStars();
+    render();
+  </script>
 
 </body>
 </html>
